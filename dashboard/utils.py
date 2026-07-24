@@ -62,6 +62,7 @@ def apply_custom_theme():
 @st.cache_data(show_spinner=False)
 def load_daily_returns() -> pd.DataFrame:
     """Load only verified daily returns used by all charts and portfolio work."""
+    # Cache busted for Rf=6.5% update
     frame = pd.read_parquet(PROCESSED_DIR / "daily_returns.parquet")
     frame["Date"] = pd.to_datetime(frame["Date"])
     return frame
@@ -70,6 +71,7 @@ def load_daily_returns() -> pd.DataFrame:
 @st.cache_data(show_spinner=False)
 def load_research_dataset() -> pd.DataFrame:
     """Load the full benchmark-aligned research dataset including prices."""
+    # Cache busted for Rf=6.5% update
     frame = pd.read_parquet(PROCESSED_DIR / "research_dataset.parquet")
     frame["Date"] = pd.to_datetime(frame["Date"])
     return frame
@@ -93,6 +95,7 @@ def load_company_master() -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False)
 def load_company_metrics() -> pd.DataFrame:
+    # Cache busted for Rf=6.5% update
     frame = pd.read_parquet(ANALYSIS_DIR / "company_regime_metrics.parquet")
     frame["Regime"] = pd.Categorical(frame["Regime"], REGIME_ORDER, ordered=True)
     return frame
@@ -100,6 +103,7 @@ def load_company_metrics() -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False)
 def load_sector_daily() -> pd.DataFrame:
+    # Cache busted for Rf=6.5% update
     frame = pd.read_parquet(ANALYSIS_DIR / "sector_daily_returns.parquet")
     frame["Date"] = pd.to_datetime(frame["Date"])
     return frame
@@ -107,6 +111,7 @@ def load_sector_daily() -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False)
 def load_sector_metrics() -> pd.DataFrame:
+    # Cache busted for Rf=6.5% update
     frame = pd.read_csv(ANALYSIS_DIR / "sector_regime_metrics.csv")
     frame["Regime"] = pd.Categorical(frame["Regime"], REGIME_ORDER, ordered=True)
     return frame
@@ -114,6 +119,7 @@ def load_sector_metrics() -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False)
 def load_market_metrics() -> pd.DataFrame:
+    # Cache busted for Rf=6.5% update
     frame = pd.read_csv(ANALYSIS_DIR / "market_regime_metrics.csv")
     frame["Regime"] = pd.Categorical(frame["Regime"], REGIME_ORDER, ordered=True)
     return frame

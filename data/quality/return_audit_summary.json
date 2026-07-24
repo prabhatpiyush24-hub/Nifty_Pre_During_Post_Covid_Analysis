@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "study_period": {
+    "start": "2015-01-01",
+    "end": "2025-12-31"
+  },
+  "covid_regimes": {
+    "pre_covid": "2015-01-01 to 2020-02-28",
+    "covid_shock": "2020-03-01 to 2020-03-31",
+    "post_covid": "2020-04-01 to 2025-12-31"
+  },
+  "eligible_companies": 311,
+  "benchmark_sessions": 2708,
+  "benchmark_aligned_company_rows": 842186,
+  "valid_daily_return_rows": 841873,
+  "companies_with_complete_daily_return_coverage": 309,
+  "companies_with_flagged_missing_sessions": 2,
+  "max_formula_error": 0.0,
+  "warnings": 2,
+  "errors": 0,
+  "method": "Returns are recomputed from adjusted closes only after alignment to the NIFTY 50 calendar. No missing price or return is imputed."
+}

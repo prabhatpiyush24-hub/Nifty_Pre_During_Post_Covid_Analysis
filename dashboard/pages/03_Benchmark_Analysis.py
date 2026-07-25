@@ -72,7 +72,7 @@ st.subheader("Daily Benchmark Returns")
 fig_ret = go.Figure()
 fig_ret.add_trace(go.Bar(
     x=nifty["Date"], y=nifty["NIFTY Return"], name="NIFTY 50",
-    marker_color="steelblue", opacity=0.7,
+    marker_color="#00FFFF", opacity=0.8,
 ))
 fig_ret.update_layout(title="NIFTY 50 — Daily Returns",
                       yaxis_tickformat=".1%")
@@ -96,9 +96,9 @@ nifty_vol["21-Day"] = nifty_vol["NIFTY Return"].rolling(21).std() * np.sqrt(252)
 nifty_vol["63-Day"] = nifty_vol["NIFTY Return"].rolling(63).std() * np.sqrt(252)
 fig_vol = go.Figure()
 fig_vol.add_trace(go.Scatter(x=nifty_vol["Date"], y=nifty_vol["21-Day"],
-                             name="21-day", line=dict(color="steelblue")))
+                             name="21-day", line=dict(color="#00FFFF")))
 fig_vol.add_trace(go.Scatter(x=nifty_vol["Date"], y=nifty_vol["63-Day"],
-                             name="63-day", line=dict(color="orange")))
+                             name="63-day", line=dict(color="#FF9900")))
 fig_vol.update_layout(title="NIFTY 50 — Annualized Rolling Volatility",
                       yaxis_tickformat=".0%")
 st.plotly_chart(fig_vol, use_container_width=True)
@@ -112,7 +112,7 @@ nifty_dd["Drawdown"] = wealth / wealth.cummax() - 1
 fig_dd = go.Figure()
 fig_dd.add_trace(go.Scatter(
     x=nifty_dd["Date"], y=nifty_dd["Drawdown"], fill="tozeroy",
-    name="Drawdown", line=dict(color="crimson"),
+    name="Drawdown", line=dict(color="#FF0055"),
 ))
 fig_dd.update_layout(title="NIFTY 50 — Drawdowns", yaxis_tickformat=".0%")
 st.plotly_chart(fig_dd, use_container_width=True)

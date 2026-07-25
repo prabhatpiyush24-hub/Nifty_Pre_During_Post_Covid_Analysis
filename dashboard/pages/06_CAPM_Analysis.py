@@ -143,7 +143,7 @@ st.info(
 fig_reg = go.Figure()
 fig_reg.add_trace(go.Scatter(
     x=market_ret, y=stock_ret, mode="markers", name="Daily Returns",
-    marker=dict(size=4, color="steelblue", opacity=0.4),
+    marker=dict(size=4, color="#00FFFF", opacity=0.4),
 ))
 x_line = np.linspace(market_ret.min(), market_ret.max(), 100)
 y_line = reg["Alpha (Daily)"] + reg["Beta"] * x_line

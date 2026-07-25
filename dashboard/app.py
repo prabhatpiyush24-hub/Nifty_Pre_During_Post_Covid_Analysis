@@ -52,7 +52,7 @@ st.info("All performance statistics use adjusted-close returns. Sharpe and alpha
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
-    "<div style='text-align: center; color: #FF9900; font-family: monospace; font-size: 0.9em; margin-top: 20px; border: 1px solid #FF9900; padding: 5px;'>"
+    "<div style='text-align: center; color: #94A3B8; font-size: 0.85em; margin-top: 20px; font-weight: 500; letter-spacing: 0.05em;'>"
     "MADE BY PIYUSH PRABHAT"
     "</div>", 
     unsafe_allow_html=True

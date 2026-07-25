@@ -99,12 +99,12 @@ st.subheader("Daily Returns")
 fig_ret = go.Figure()
 fig_ret.add_trace(go.Bar(
     x=stock["Date"], y=stock["Return"], name=selected_symbol,
-    marker_color="#00FFFF", opacity=0.8,
+    marker_color="#3B82F6", opacity=0.8,
 ))
 if compare_benchmark:
     fig_ret.add_trace(go.Scatter(
         x=stock["Date"], y=stock["NIFTY Return"], name="NIFTY 50",
-        line=dict(color="#FF9900", width=1), opacity=0.5,
+        line=dict(color="#94A3B8", width=1), opacity=0.5,
     ))
 fig_ret.update_layout(title=f"{selected_symbol} — Daily Returns",
                       yaxis_tickformat=".1%", barmode="overlay")
@@ -118,13 +118,13 @@ stock_cum["Stock Cumulative"] = (1 + stock_cum["Return"]).cumprod() - 1
 fig_cum = go.Figure()
 fig_cum.add_trace(go.Scatter(
     x=stock_cum["Date"], y=stock_cum["Stock Cumulative"],
-    name=selected_symbol, line=dict(color="#00FFFF"),
+    name=selected_symbol, line=dict(color="#3B82F6"),
 ))
 if compare_benchmark:
     stock_cum["NIFTY Cumulative"] = (1 + stock_cum["NIFTY Return"]).cumprod() - 1
     fig_cum.add_trace(go.Scatter(
         x=stock_cum["Date"], y=stock_cum["NIFTY Cumulative"],
-        name="NIFTY 50", line=dict(color="#FF9900"),
+        name="NIFTY 50", line=dict(color="#94A3B8"),
     ))
 fig_cum.update_layout(title=f"{selected_symbol} — Cumulative Returns",
                       yaxis_tickformat=".0%")
@@ -138,13 +138,13 @@ stock_vol["Stock Vol"] = stock_vol["Return"].rolling(21).std() * np.sqrt(252)
 fig_vol = go.Figure()
 fig_vol.add_trace(go.Scatter(
     x=stock_vol["Date"], y=stock_vol["Stock Vol"],
-    name=selected_symbol, line=dict(color="#00FFFF"),
+    name=selected_symbol, line=dict(color="#3B82F6"),
 ))
 if compare_benchmark:
     stock_vol["NIFTY Vol"] = stock_vol["NIFTY Return"].rolling(21).std() * np.sqrt(252)
     fig_vol.add_trace(go.Scatter(
         x=stock_vol["Date"], y=stock_vol["NIFTY Vol"],
-        name="NIFTY 50", line=dict(color="#FF9900"),
+        name="NIFTY 50", line=dict(color="#94A3B8"),
     ))
 fig_vol.update_layout(title=f"{selected_symbol} — Annualized Rolling Volatility",
                       yaxis_tickformat=".0%")
@@ -158,14 +158,14 @@ drawdown = wealth / wealth.cummax() - 1
 fig_dd = go.Figure()
 fig_dd.add_trace(go.Scatter(
     x=stock["Date"], y=drawdown, fill="tozeroy",
-    name=selected_symbol, line=dict(color="#FF0055"),
+    name=selected_symbol, line=dict(color="#EF4444"),
 ))
 if compare_benchmark:
     bm_wealth = (1 + stock["NIFTY Return"]).cumprod()
     bm_dd = bm_wealth / bm_wealth.cummax() - 1
     fig_dd.add_trace(go.Scatter(
         x=stock["Date"], y=bm_dd, name="NIFTY 50",
-        line=dict(color="#FF9900"),
+        line=dict(color="#94A3B8"),
     ))
 fig_dd.update_layout(title=f"{selected_symbol} — Drawdowns",
                      yaxis_tickformat=".0%")

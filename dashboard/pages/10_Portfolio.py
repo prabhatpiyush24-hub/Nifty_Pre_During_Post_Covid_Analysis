@@ -95,7 +95,12 @@ row2 = st.columns(3)
 row2[0].metric("Max Drawdown", to_percent(summary["Maximum Drawdown"]), help="Largest peak-to-trough decline.")
 row2[1].metric("Beta to NIFTY 50", to_number(summary["Beta to NIFTY 50"]), help="Portfolio sensitivity to the NIFTY 50 index.")
 
-# ── Weights and Wealth chart ─────────────────────────────────────
+st.info("""
+**Quant Explainer: Portfolio Optimization**
+- **Equal Weight**: A naive baseline where every asset gets the exact same capital allocation.
+- **Minimum Variance**: A defensive strategy that mathematically minimizes the total portfolio risk (volatility) by finding assets that offset each other.
+- **Maximum Sharpe**: The optimal "Tangency" portfolio that maximizes risk-adjusted returns (highest return per unit of risk).
+""")
 left, right = st.columns([1, 2])
 with left:
     st.subheader("Portfolio Weights")

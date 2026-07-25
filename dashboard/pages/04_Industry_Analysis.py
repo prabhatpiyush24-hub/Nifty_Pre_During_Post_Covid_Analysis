@@ -129,8 +129,16 @@ st.dataframe(
         "Sharpe Ratio (Rf=6.5%)": "{:.2f}", "Maximum Drawdown": "{:.2%}",
         "Beta to NIFTY 50": "{:.2f}", "Annualized Alpha (Rf=6.5%)": "{:.2%}",
     }),
-    hide_index=True, use_container_width=True,
+    hide_index=True,
+    use_container_width=True,
 )
+st.info("""
+**Quant Explainer: Industry Scorecard**
+This table aggregates individual stock performance into sector-level metrics. 
+- **Beta**: Sectors with a Beta > 1 (like Tech or Auto) are highly correlated with market swings. Sectors with Beta < 1 (like Pharma or FMCG) act as defensive cushions.
+- **Alpha**: Positive alpha indicates the sector generated returns *above* what its risk level (Beta) would predict.
+*Use this scorecard to identify structural winners and losers at a macro level before picking individual stocks.*
+""")
 
 # ── Industry wealth paths ───────────────────────────────────────
 st.subheader("Industry Wealth Paths")

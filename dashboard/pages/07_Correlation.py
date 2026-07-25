@@ -73,6 +73,11 @@ else:
     st.info("Select at least two companies to display a correlation matrix.")
 
 # ── Pairwise shifts and company-average ──────────────────────────
+st.info("""
+**Quant Explainer: Correlation Regime Shifts**
+- **Largest Pairwise Shifts** (left): Identifies specific pairs of stocks whose relationship fundamentally broke or strengthened after COVID.
+- **Company-Average Shift** (right): Shows the aggregate change in correlation. A market-wide increase in correlation indicates a "risk-off" environment where all stocks move together, reducing the benefits of diversification.
+""")
 left, right = st.columns(2)
 with left:
     st.subheader("Largest pairwise correlation shifts")

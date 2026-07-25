@@ -30,41 +30,24 @@ def apply_custom_theme():
     st.markdown(
         """
         <style>
-        /* True pitch black background */
+        /* Sleek institutional dark background */
         .stApp, .main {
-            background-color: #000000 !important;
+            background-color: #0E1117 !important;
         }
 
-        /* Terminal Font for Main Content */
-        .main p, .main span, .main div, .main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main table, .main th, .main td, .main label {
-            font-family: "Consolas", "Courier New", monospace !important;
-            color: #FF9900 !important; /* Bloomberg Amber */
-        }
-
-        /* Protect Material Icons from being overwritten by Consolas */
-        .material-icons, .material-symbols-rounded, .material-symbols-outlined, [class^="stIcon"] {
-            font-family: 'Material Symbols Rounded', 'Material Icons' !important;
-            color: inherit !important;
-        }
-
-        /* Sidebar Font (keep normal so text fits and doesn't cut off) */
-        .stSidebar span, .stSidebar p, .stSidebar div {
-            color: #FF9900 !important;
-        }
-
-        /* Metric values - Bloomberg Green */
+        /* Metric values - Professional Green/Teal */
         .main [data-testid="stMetricValue"] div, .main [data-testid="stMetricValue"] {
-            color: #00FF00 !important; 
+            color: #10B981 !important; 
             font-size: 1.4rem !important;
             white-space: normal !important;
             word-break: break-word !important;
             line-height: 1.2 !important;
-            font-weight: bold !important;
+            font-weight: 600 !important;
         }
         
-        /* Metric Delta/Subtext - Bright Cyan */
+        /* Metric Delta/Subtext - Muted slate */
         .main [data-testid="stMetricDelta"] div, .main [data-testid="stMetricDelta"] {
-            color: #00FFFF !important;
+            color: #94A3B8 !important;
             font-size: 1.0rem !important;
         }
 
@@ -74,17 +57,24 @@ def apply_custom_theme():
             max-width: 95% !important;
         }
         
-        /* Terminal Alert Boxes (st.info) */
+        /* Institutional Alert Boxes (st.info) */
         div[data-testid="stAlert"] {
-            background-color: #0A0A0A !important;
-            border: 1px solid #FF9900 !important;
-            color: #FF9900 !important;
-            border-radius: 0px !important;
+            background-color: #1E293B !important;
+            border-left: 4px solid #3B82F6 !important;
+            border-top: none !important;
+            border-right: none !important;
+            border-bottom: none !important;
+            color: #E2E8F0 !important;
+            border-radius: 4px !important;
+            padding: 1rem !important;
+            font-size: 0.95rem !important;
         }
         
-        /* Stricter DataFrame borders */
+        /* Clean Dataframes */
         [data-testid="stDataFrame"] {
-            border: 1px solid #FF9900 !important;
+            border: 1px solid #334155 !important;
+            border-radius: 6px !important;
+            background-color: #0F172A !important;
         }
         </style>
         """,

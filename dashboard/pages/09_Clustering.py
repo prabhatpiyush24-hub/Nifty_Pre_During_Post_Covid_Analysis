@@ -63,9 +63,9 @@ fig_cluster = px.scatter(
 )
 st.plotly_chart(fig_cluster, use_container_width=True)
 st.info("""
-**Terminal Explainer: K-Means Clustering**
+**Quant Explainer: K-Means Clustering**
 - **What you're seeing**: Companies grouped mathematically into distinct clusters based on their historical risk and return profiles.
-- **How to read it**: The colors represent completely different mathematical 'DNA'. Notice how Cluster 0 might consist of high-growth tech stocks, while Cluster 1 captures slow-growing dividend stocks. Use the dropdowns to explore how these groupings separate across different metrics (e.g. Volatility vs Sharpe Ratio).
+- **How to read it**: The colors represent completely different mathematical 'DNA'. Notice how Cluster 0 might consist of high-growth tech stocks, while Cluster 1 captures slow-growing dividend stocks. Use the dropdowns to explore how these groupings separate across different metrics.
 """)
 
 # ── Cluster statistics ───────────────────────────────────────────
@@ -88,6 +88,13 @@ st.dataframe(
     }),
     hide_index=True, use_container_width=True,
 )
+st.info("""
+**Quant Explainer: Cluster Statistics**
+This table calculates the "Centroid" (average values) for each mathematical cluster. 
+By looking at the Mean Beta and Mean Volatility, you can instantly categorize clusters into archetypes:
+- e.g., A cluster with Beta < 0.8 and Low Volatility is the **Defensive/Value Cluster**.
+- e.g., A cluster with Beta > 1.2 and High Volatility is the **High-Beta/Growth Cluster**.
+""")
 
 # ── Cluster composition and profile ──────────────────────────────
 left, right = st.columns(2)

@@ -82,6 +82,10 @@ dataset_summary = pd.DataFrame({
     ],
 })
 st.dataframe(dataset_summary, hide_index=True, use_container_width=True)
+st.info("""
+**Quant Explainer: Dataset Summary**
+This table confirms the integrity of the data pipeline. We strictly analyze companies that have full, unbroken trading histories over the 10-year study period to prevent survivorship bias and missing data anomalies.
+""")
 
 # ── Benchmark information ────────────────────────────────────────
 st.subheader("Benchmark Information — NIFTY 50")
@@ -115,6 +119,10 @@ st.plotly_chart(
 )
 
 # ── Cross-sectional reference ────────────────────────────────────
+st.info("""
+**Quant Explainer: Market Reference & Cross-Sectional Spread**
+The **Market Reference** (left) shows the baseline performance of the NIFTY 50 index. The **Cross-Sectional Spread** (right) aggregates the median metrics of all 300+ individual companies. If the median company underperforms the NIFTY 50, it indicates that market gains were driven by a small handful of mega-cap stocks rather than broad participation.
+""")
 left, right = st.columns(2)
 with left:
     st.subheader("Full-sample market reference")
@@ -182,3 +190,10 @@ fmt = {
     "Beta to NIFTY 50": "{:.2f}",
 }
 st.dataframe(leaders.style.format(fmt), hide_index=True, use_container_width=True)
+st.info("""
+**Quant Explainer: Company Leaders**
+This table isolates the absolute best-performing assets in the NIFTY 500 universe based on the selected metric. 
+- **CAGR**: Pure growth rate (ignores risk).
+- **Sharpe/Alpha**: Risk-adjusted returns (how much excess return was generated per unit of volatility). 
+*Use this to identify outlier stocks that consistently beat the market on a risk-adjusted basis.*
+""")

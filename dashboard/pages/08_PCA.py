@@ -68,6 +68,14 @@ st.info(
     f"**{explained['Cumulative Variance'].iloc[-1]:.1%}** "
     f"of total return variance."
 )
+)
+st.info("""
+**Quant Explainer: Explained Variance**
+In institutional quantitative finance, PCA is used to extract hidden "Risk Factors" from the market. 
+- **PC1 (Principal Component 1)** usually represents the broader market movement (e.g., the NIFTY 50 itself). If PC1 explains 40% of variance, it means 40% of all stock volatility is just stocks moving with the market.
+- **PC2, PC3, etc.** often map to sector-specific factors, size factors (large vs small cap), or momentum factors.
+*By hedging out these major components, quants isolate pure idiosyncratic (stock-specific) returns, known as statistical arbitrage.*
+""")
 
 # ── PC1 vs PC2 scatter ───────────────────────────────────────────
 st.subheader("PC1 vs PC2 — Market Structure")

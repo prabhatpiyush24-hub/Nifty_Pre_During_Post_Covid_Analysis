@@ -89,6 +89,11 @@ st.plotly_chart(fig_dd, use_container_width=True)
 st.caption("The companies that suffered the largest peak-to-trough drops in value.")
 
 # ── Risk-adjusted and tail-risk tables ───────────────────────────
+st.info("""
+**Quant Explainer: Risk & Return Rankings**
+- **Risk-Adjusted Leaders** (left): Ranks stocks by Sharpe Ratio. High Sharpe indicates the stock generates high returns without wild price swings.
+- **Tail-Risk Leaders** (right): Ranks stocks by CVaR (Conditional Value at Risk). CVaR measures the expected loss *in the worst 5% of trading days*. Stocks here are highly defensive—their worst-case scenarios are much milder than the rest of the market.
+""")
 left, right = st.columns(2)
 with left:
     st.subheader("Best risk-adjusted companies")

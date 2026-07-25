@@ -100,6 +100,7 @@ fig_ret = go.Figure()
 fig_ret.add_trace(go.Bar(
     x=stock["Date"], y=stock["Return"], name=selected_symbol,
     marker_color="#3B82F6", opacity=0.8,
+    marker_line_width=0,
 ))
 if compare_benchmark:
     fig_ret.add_trace(go.Scatter(

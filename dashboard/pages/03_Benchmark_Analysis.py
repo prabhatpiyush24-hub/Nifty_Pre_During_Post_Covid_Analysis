@@ -73,6 +73,7 @@ fig_ret = go.Figure()
 fig_ret.add_trace(go.Bar(
     x=nifty["Date"], y=nifty["NIFTY Return"], name="NIFTY 50",
     marker_color="#3B82F6", opacity=0.8,
+    marker_line_width=0,
 ))
 fig_ret.update_layout(title="NIFTY 50 — Daily Returns",
                       yaxis_tickformat=".1%")

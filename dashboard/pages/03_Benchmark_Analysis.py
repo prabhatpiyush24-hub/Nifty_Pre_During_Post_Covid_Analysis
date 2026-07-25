@@ -47,14 +47,16 @@ nifty_prices = nifty_prices[
 ]
 
 # ── Performance summary ──────────────────────────────────────────
-st.subheader("NIFTY 50 Performance Summary")
-cards = st.columns(6)
-cards[0].metric("Total Return", to_percent(market_full["Total Return"]), help="Cumulative return of the index.")
-cards[1].metric("CAGR", to_percent(market_full["CAGR"]), help="Compound Annual Growth Rate.")
-cards[2].metric("Volatility", to_percent(market_full["Annualized Volatility"]), help="Annualized standard deviation of daily returns.")
-cards[3].metric("Sharpe Ratio", to_number(market_full["Sharpe Ratio (Rf=6.5%)"]), help="Risk-adjusted return.")
-cards[4].metric("Max Drawdown", to_percent(market_full["Maximum Drawdown"]), help="Largest peak-to-trough drop.")
-cards[5].metric("Observations", f"{int(market_full['Observations']):,}", help="Number of trading days.")
+st.subheader("Benchmark Risk & Return Metrics")
+row1 = st.columns(3)
+row1[0].metric("Total Return", to_percent(market_full["Total Return"]), help="Cumulative return of the index.")
+row1[1].metric("CAGR", to_percent(market_full["CAGR"]), help="Compound Annual Growth Rate.")
+row1[2].metric("Volatility", to_percent(market_full["Annualized Volatility"]), help="Annualized standard deviation of daily returns.")
+
+row2 = st.columns(3)
+row2[0].metric("Sharpe Ratio", to_number(market_full["Sharpe Ratio (Rf=6.5%)"]), help="Risk-adjusted return.")
+row2[1].metric("Max Drawdown", to_percent(market_full["Maximum Drawdown"]), help="Largest peak-to-trough drop.")
+row2[2].metric("Observations", f"{int(market_full['Observations']):,}", help="Number of trading days.")
 
 st.markdown("---")
 

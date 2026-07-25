@@ -86,12 +86,14 @@ except ValueError as error:
 portfolio_returns = returns.mul(weights, axis=1).sum(axis=1)
 summary = portfolio_summary(portfolio_returns, benchmark, risk_free)
 
-cards = st.columns(5)
-cards[0].metric("Portfolio Return", to_percent(summary["Annualized Return"]), help="Annualized return of the selected portfolio.")
-cards[1].metric("Portfolio Risk", to_percent(summary["Annualized Volatility"]), help="Annualized volatility (risk) of the portfolio.")
-cards[2].metric("Sharpe Ratio", to_number(summary["Sharpe Ratio"]), help="Risk-adjusted return (Return / Risk).")
-cards[3].metric("Max Drawdown", to_percent(summary["Maximum Drawdown"]), help="Largest peak-to-trough decline.")
-cards[4].metric("Beta to NIFTY 50", to_number(summary["Beta to NIFTY 50"]), help="Portfolio sensitivity to the NIFTY 50 index.")
+row1 = st.columns(3)
+row1[0].metric("Portfolio Return", to_percent(summary["Annualized Return"]), help="Annualized return of the selected portfolio.")
+row1[1].metric("Portfolio Risk", to_percent(summary["Annualized Volatility"]), help="Annualized volatility (risk) of the portfolio.")
+row1[2].metric("Sharpe Ratio", to_number(summary["Sharpe Ratio"]), help="Risk-adjusted return (Return / Risk).")
+
+row2 = st.columns(3)
+row2[0].metric("Max Drawdown", to_percent(summary["Maximum Drawdown"]), help="Largest peak-to-trough decline.")
+row2[1].metric("Beta to NIFTY 50", to_number(summary["Beta to NIFTY 50"]), help="Portfolio sensitivity to the NIFTY 50 index.")
 
 # ── Weights and Wealth chart ─────────────────────────────────────
 left, right = st.columns([1, 2])
@@ -137,7 +139,6 @@ st.caption("Visual breakdown of how capital is distributed among the selected co
 
 # ── Efficient Frontier ───────────────────────────────────────────
 st.subheader("Efficient Frontier")
-st.caption("2,000 random long-only portfolios with marked optimal portfolios")
 frontier = efficient_frontier_points(returns, n_portfolios=2000, risk_free=risk_free)
 
 fig_ef = px.scatter(
@@ -176,7 +177,11 @@ for alt_method in ["Equal Weight", "Minimum Variance", "Maximum Sharpe"]:
         pass
 
 st.plotly_chart(fig_ef, use_container_width=True)
-st.caption("Plots 2,000 random portfolios to form the Efficient Frontier. The stars/diamonds highlight the theoretically optimal portfolios.")
+st.info("""
+**Terminal Explainer: The Efficient Frontier**
+- **What you're seeing**: We simulated 2,000 completely random portfolios (the cloud of dots). The color represents the **Sharpe Ratio** (Yellow is highly efficient, Dark Blue is inefficient).
+- **How to read it**: The 'Efficient Frontier' is the upper-left edge of this cloud. A portfolio on this edge gives you the absolute maximum possible return for that specific level of risk. The highlighted stars and diamonds pinpoint the exact mathematical portfolios that optimize for Minimum Variance (lowest risk) or Maximum Sharpe (best risk-return trade-off).
+""")
 
 # ── Portfolio Comparison Table ───────────────────────────────────
 st.subheader("Portfolio Comparison")

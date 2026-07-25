@@ -30,26 +30,51 @@ def apply_custom_theme():
     st.markdown(
         """
         <style>
-        /* Fix metric truncation and adjust size */
-        [data-testid="stMetricValue"] {
-            font-size: 1.3rem !important;
+        /* True pitch black background */
+        .stApp, .main {
+            background-color: #000000 !important;
+        }
+
+        /* Terminal Font for everything */
+        html, body, p, span, div, h1, h2, h3, h4, h5, h6, table, th, td, label {
+            font-family: "Consolas", "Courier New", monospace !important;
+            color: #FF9900 !important; /* Bloomberg Amber */
+        }
+
+        /* Metric values - Bloomberg Green */
+        [data-testid="stMetricValue"] div {
+            color: #00FF00 !important; 
+            font-size: 1.4rem !important;
             white-space: normal !important;
             word-break: break-word !important;
             line-height: 1.2 !important;
-        }
-        [data-testid="stMetricDelta"] {
-            font-size: 0.9rem !important;
+            font-weight: bold !important;
         }
         
-        /* Adjust padding for denser, professional layout */
+        /* Metric Delta/Subtext - Bright Cyan */
+        [data-testid="stMetricDelta"] div {
+            color: #00FFFF !important;
+            font-size: 1.0rem !important;
+        }
+
+        /* Adjust padding for denser layout */
         .block-container {
-            padding-top: 2rem !important;
-            padding-bottom: 2rem !important;
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+            max-width: 95% !important;
         }
         
-        /* High contrast text */
-        p, span, div {
-            color: #E0E0E0;
+        /* Terminal Alert Boxes (st.info) */
+        div[data-testid="stAlert"] {
+            background-color: #0A0A0A !important;
+            border: 1px solid #FF9900 !important;
+            color: #FF9900 !important;
+            border-radius: 0px !important;
+        }
+        
+        /* Stricter DataFrame borders */
+        [data-testid="stDataFrame"] {
+            border: 1px solid #FF9900 !important;
         }
         </style>
         """,

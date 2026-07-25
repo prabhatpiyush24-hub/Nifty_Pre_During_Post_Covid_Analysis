@@ -122,13 +122,15 @@ market_ret = stock_daily["NIFTY Return"].to_numpy()
 reg = capm_regression(stock_ret, market_ret)
 
 # Regression metrics
-cards = st.columns(6)
-cards[0].metric("Beta", to_number(reg["Beta"]), help="Volatility relative to benchmark.")
-cards[1].metric("Alpha (Ann.)", to_percent(reg["Alpha (Annualized)"]), help="Excess annualized return.")
-cards[2].metric("R²", to_number(reg["R²"]), help="Proportion of variance explained by the market.")
-cards[3].metric("P-value (Beta)", f"{reg['P-value (Beta)']:.2e}", help="Statistical significance of Beta.")
-cards[4].metric("Std Error", to_number(reg["Std Error (Beta)"], 4), help="Standard error of the Beta estimate.")
-cards[5].metric("Residual Std", to_number(reg["Residual Std"], 4), help="Standard deviation of residuals.")
+row1 = st.columns(3)
+row1[0].metric("Beta", to_number(reg["Beta"]), help="Volatility relative to benchmark.")
+row1[1].metric("Alpha (Ann.)", to_percent(reg["Alpha (Annualized)"]), help="Excess annualized return.")
+row1[2].metric("R²", to_number(reg["R²"]), help="Proportion of variance explained by the market.")
+
+row2 = st.columns(3)
+row2[0].metric("P-value (Beta)", f"{reg['P-value (Beta)']:.2e}", help="Statistical significance of Beta.")
+row2[1].metric("Std Error", to_number(reg["Std Error (Beta)"], 4), help="Standard error of the Beta estimate.")
+row2[2].metric("Residual Std", to_number(reg["Residual Std"], 4), help="Standard deviation of residuals.")
 
 # CAPM expected return
 expected_return = reg["Beta"] * market_cagr
@@ -156,7 +158,11 @@ fig_reg.update_layout(
     xaxis_tickformat=".1%", yaxis_tickformat=".1%",
 )
 st.plotly_chart(fig_reg, use_container_width=True)
-st.caption("Scatter plot of daily returns showing the line of best fit (regression). A steeper slope means higher Beta.")
+st.info("""
+**Terminal Explainer: CAPM Regression (Beta & Alpha)**
+- **What you're seeing**: Each dot is a single trading day. The X-axis is how the broader market (NIFTY 50) performed that day, and the Y-axis is how this specific stock performed.
+- **How to read it**: The red line is the 'line of best fit' (Linear Regression). The steepness (slope) of this line is the **Beta**. If the line is steep (> 1.0), this stock is highly volatile and exaggerates market movements. The Y-intercept is the **Alpha**, representing the stock's excess return regardless of the market.
+""")
 
 # ── Stock vs Benchmark ───────────────────────────────────────────
 st.subheader("Stock vs Benchmark Cumulative Performance")

@@ -62,7 +62,11 @@ fig_cluster = px.scatter(
     size=size_col,
 )
 st.plotly_chart(fig_cluster, use_container_width=True)
-st.caption("Visualizes the algorithm's grouping of companies. Adjust X and Y axes to explore how clusters differ.")
+st.info("""
+**Terminal Explainer: K-Means Clustering**
+- **What you're seeing**: Companies grouped mathematically into distinct clusters based on their historical risk and return profiles.
+- **How to read it**: The colors represent completely different mathematical 'DNA'. Notice how Cluster 0 might consist of high-growth tech stocks, while Cluster 1 captures slow-growing dividend stocks. Use the dropdowns to explore how these groupings separate across different metrics (e.g. Volatility vs Sharpe Ratio).
+""")
 
 # ── Cluster statistics ───────────────────────────────────────────
 st.subheader("Cluster Statistics")

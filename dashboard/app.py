@@ -48,12 +48,12 @@ Use the sidebar to explore the complete research workflow:
 - **Data Quality** — transparent source-to-return validation and all flagged sessions.
 """
 )
-st.info("All performance statistics use adjusted-close returns. Sharpe and alpha assume a 0% risk-free rate unless the Portfolio Lab input is changed.")
+st.info("All performance statistics use adjusted-close returns. Sharpe and alpha assume a 6.5% risk-free rate (Indian 10Y Govt Bond equivalent).")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
-    "<div style='text-align: center; color: #888; font-size: 0.85em; margin-top: 20px; font-weight: 500;'>"
-    "Made by Piyush Prabhat"
+    "<div style='text-align: center; color: #FF9900; font-family: monospace; font-size: 0.9em; margin-top: 20px; border: 1px solid #FF9900; padding: 5px;'>"
+    "MADE BY PIYUSH PRABHAT"
     "</div>", 
     unsafe_allow_html=True
 )

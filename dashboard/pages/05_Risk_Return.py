@@ -167,9 +167,11 @@ st.plotly_chart(
 )
 st.caption("Direct comparison of the selected company's wealth growth versus the NIFTY 50 index.")
 
-cards = st.columns(5)
-cards[0].metric("CAGR", to_percent(company["CAGR"]), help="Compound Annual Growth Rate.")
-cards[1].metric("Volatility", to_percent(company["Annualized Volatility"]), help="Annualized risk measure.")
-cards[2].metric("Beta", to_number(company["Beta to NIFTY 50"]), help="Sensitivity to the NIFTY 50 benchmark.")
-cards[3].metric("Alpha", to_percent(company["Annualized Alpha (Rf=6.5%)"]), help="Annualized excess return relative to the benchmark.")
-cards[4].metric("Max Drawdown", to_percent(company["Maximum Drawdown"]), help="Largest peak-to-trough drop.")
+row1 = st.columns(3)
+row1[0].metric("CAGR", to_percent(company["CAGR"]), help="Compound Annual Growth Rate.")
+row1[1].metric("Volatility", to_percent(company["Annualized Volatility"]), help="Annualized risk measure.")
+row1[2].metric("Beta", to_number(company["Beta to NIFTY 50"]), help="Sensitivity to the NIFTY 50 benchmark.")
+
+row2 = st.columns(3)
+row2[0].metric("Alpha", to_percent(company["Annualized Alpha (Rf=6.5%)"]), help="Annualized excess return relative to the benchmark.")
+row2[1].metric("Max Drawdown", to_percent(company["Maximum Drawdown"]), help="Largest peak-to-trough drop.")

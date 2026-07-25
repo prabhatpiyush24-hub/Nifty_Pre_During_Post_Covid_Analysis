@@ -141,6 +141,10 @@ if n_components >= 3:
     )
     fig_3d.update_layout(height=600)
     st.plotly_chart(fig_3d, use_container_width=True)
-    st.caption("A 3-dimensional view of company behavior using the top 3 components.")
+    st.info("""
+    **Terminal Explainer: 3D Principal Component Analysis**
+    - **What you're seeing**: This 3D cloud maps how stocks behave relative to the broader market's hidden factors.
+    - **How to read it**: Stocks plotted close to each other in this 3D space share highly similar return profiles and risk exposures, regardless of their official industry classification. Outliers (dots far away from the center cluster) are idiosyncratic stocks that move independently from the broader market.
+    """)
 else:
     st.info("Select at least 3 components to view the 3D visualization.")

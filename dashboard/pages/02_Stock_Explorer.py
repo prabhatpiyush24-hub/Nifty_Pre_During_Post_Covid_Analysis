@@ -72,15 +72,18 @@ if stock.empty:
 
 # ── Performance metrics ──────────────────────────────────────────
 m = compute_stock_metrics(stock["Return"], stock["NIFTY Return"], stock["Date"])
-cards = st.columns(8)
-cards[0].metric("Total Return", to_percent(m.get("Total Return")), help="Cumulative return over the selected period.")
-cards[1].metric("CAGR", to_percent(m.get("CAGR")), help="Compound Annual Growth Rate.")
-cards[2].metric("Ann. Volatility", to_percent(m.get("Annualized Volatility")), help="Annualized standard deviation of daily returns.")
-cards[3].metric("Sharpe Ratio", to_number(m.get("Sharpe Ratio")), help="Risk-adjusted return (using 0% risk-free rate).")
-cards[4].metric("Max Drawdown", to_percent(m.get("Maximum Drawdown")), help="Largest peak-to-trough drop in value.")
-cards[5].metric("Beta", to_number(m.get("Beta")), help="Sensitivity to the NIFTY 50 benchmark.")
-cards[6].metric("Alpha (Ann.)", to_percent(m.get("Alpha (Ann.)")), help="Annualized excess return relative to the benchmark.")
-cards[7].metric("Observations", f"{m.get('Observations', 0):,}", help="Number of trading days in the selected period.")
+st.subheader("Performance & Risk Metrics")
+row1 = st.columns(4)
+row1[0].metric("Total Return", to_percent(m.get("Total Return")), help="Cumulative return over the selected period.")
+row1[1].metric("CAGR", to_percent(m.get("CAGR")), help="Compound Annual Growth Rate.")
+row1[2].metric("Ann. Volatility", to_percent(m.get("Annualized Volatility")), help="Annualized standard deviation of daily returns.")
+row1[3].metric("Sharpe Ratio", to_number(m.get("Sharpe Ratio")), help="Risk-adjusted return (using 0% risk-free rate).")
+
+row2 = st.columns(4)
+row2[0].metric("Max Drawdown", to_percent(m.get("Maximum Drawdown")), help="Largest peak-to-trough drop in value.")
+row2[1].metric("Beta", to_number(m.get("Beta")), help="Sensitivity to the NIFTY 50 benchmark.")
+row2[2].metric("Alpha (Ann.)", to_percent(m.get("Alpha (Ann.)")), help="Annualized excess return relative to the benchmark.")
+row2[3].metric("Observations", f"{m.get('Observations', 0):,}", help="Number of trading days in the selected period.")
 
 st.markdown("---")
 

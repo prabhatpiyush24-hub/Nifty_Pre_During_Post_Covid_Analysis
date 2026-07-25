@@ -44,12 +44,14 @@ This dashboard provides a comprehensive quantitative analysis of the **NIFTY 500
 - **Advanced Analytics:** We use statistical techniques (PCA, Clustering) to uncover hidden patterns and relationships among these stocks.
 """)
 
-cols = st.columns(5)
-cols[0].metric("Eligible Companies", f"{summary['eligible_companies']}", help="Total number of companies analyzed that met data quality requirements.")
-cols[1].metric("Industries", f"{daily['Industry'].nunique()}", help="Number of distinct industry classifications represented in the dataset.")
-cols[2].metric("Benchmark Sessions", f"{summary['benchmark_sessions']:,}", help="Total number of trading days in the analysis period.")
-cols[3].metric("Valid Daily Returns", f"{summary['valid_daily_return_rows']:,}", help="Total number of clean, usable daily return data points across all companies.")
-cols[4].metric("Data-Quality Status", summary["status"], help="PASS indicates all data successfully passed the stringent audit for errors and missing values.")
+row1 = st.columns(3)
+row1[0].metric("Eligible Companies", f"{summary['eligible_companies']}", help="Total number of companies analyzed that met data quality requirements.")
+row1[1].metric("Industries", f"{daily['Industry'].nunique()}", help="Number of distinct industry classifications represented in the dataset.")
+row1[2].metric("Benchmark Sessions", f"{summary['benchmark_sessions']:,}", help="Total number of trading days in the analysis period.")
+
+row2 = st.columns(3)
+row2[0].metric("Valid Daily Returns", f"{summary['valid_daily_return_rows']:,}", help="Total number of clean, usable daily return data points across all companies.")
+row2[1].metric("Data-Quality Status", summary["status"], help="PASS indicates all data successfully passed the stringent audit for errors and missing values.")
 
 # ── Dataset summary table ────────────────────────────────────────
 st.subheader("Dataset Summary")
@@ -83,11 +85,13 @@ st.dataframe(dataset_summary, hide_index=True, use_container_width=True)
 
 # ── Benchmark information ────────────────────────────────────────
 st.subheader("Benchmark Information — NIFTY 50")
-bench_cols = st.columns(4)
-bench_cols[0].metric("CAGR", to_percent(market_full["CAGR"]), help="Compound Annual Growth Rate: The annualized average rate of return.")
-bench_cols[1].metric("Volatility", to_percent(market_full["Annualized Volatility"]), help="Annualized Volatility: A measure of risk. Higher volatility means the price fluctuates more wildly.")
-bench_cols[2].metric("Maximum Drawdown", to_percent(market_full["Maximum Drawdown"]), help="The largest single drop from peak to trough in the portfolio's value.")
-bench_cols[3].metric("Sharpe Ratio", to_number(market_full["Sharpe Ratio (Rf=6.5%)"]), help="Risk-adjusted return. A higher number indicates better returns for the amount of risk taken.")
+bench_cols1 = st.columns(2)
+bench_cols1[0].metric("CAGR", to_percent(market_full["CAGR"]), help="Compound Annual Growth Rate: The annualized average rate of return.")
+bench_cols1[1].metric("Volatility", to_percent(market_full["Annualized Volatility"]), help="Annualized Volatility: A measure of risk. Higher volatility means the price fluctuates more wildly.")
+
+bench_cols2 = st.columns(2)
+bench_cols2[0].metric("Maximum Drawdown", to_percent(market_full["Maximum Drawdown"]), help="The largest single drop from peak to trough in the portfolio's value.")
+bench_cols2[1].metric("Sharpe Ratio", to_number(market_full["Sharpe Ratio (Rf=6.5%)"]), help="Risk-adjusted return. A higher number indicates better returns for the amount of risk taken.")
 
 # ── Equal-weight universe versus NIFTY 50 ────────────────────────
 st.subheader("Equal-weight Universe versus NIFTY 50")
@@ -138,6 +142,28 @@ with right:
         ],
     })
     st.dataframe(spread, hide_index=True, use_container_width=True)
+
+# ── COVID-19 Sector Surprises ────────────────────────────────────
+from utils import load_sector_metrics
+st.subheader("COVID-19 Sector Surprises & Key Findings")
+try:
+    sector_metrics = load_sector_metrics()
+    post_covid = sector_metrics[sector_metrics["Regime"] == "Post-COVID"]
+    shock = sector_metrics[sector_metrics["Regime"] == "COVID Shock (Mar 2020)"]
+    
+    if not post_covid.empty and not shock.empty:
+        best_post_covid = post_covid.loc[post_covid["CAGR"].idxmax()]
+        worst_shock = shock.loc[shock["Total Return"].idxmin()]
+        
+        st.info(f"""
+        **The March 2020 Devastation**: During the initial COVID-19 crash, **{worst_shock['Industry']}** was the hardest hit sector, suffering a staggering **{to_percent(worst_shock['Total Return'])}** total loss in just a few weeks. 
+        
+        **The Post-COVID Resurgence**: Surprisingly, the strongest rebound came from **{best_post_covid['Industry']}**, which completely inverted its trajectory to compound at an explosive **{to_percent(best_post_covid['CAGR'])}** annually in the Post-COVID era.
+        
+        *This highlights how macro-economic shocks can completely reorder market leadership and risk profiles.*
+        """)
+except Exception:
+    st.info("COVID-19 Sector data is currently unavailable.")
 
 # ── Company leaders ──────────────────────────────────────────────
 st.subheader("Company leaders: full sample")

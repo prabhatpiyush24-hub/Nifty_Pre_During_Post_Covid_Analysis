@@ -35,14 +35,25 @@ def apply_custom_theme():
             background-color: #000000 !important;
         }
 
-        /* Terminal Font for everything */
-        html, body, p, span, div, h1, h2, h3, h4, h5, h6, table, th, td, label {
+        /* Terminal Font for Main Content */
+        .main p, .main span, .main div, .main h1, .main h2, .main h3, .main h4, .main h5, .main h6, .main table, .main th, .main td, .main label {
             font-family: "Consolas", "Courier New", monospace !important;
             color: #FF9900 !important; /* Bloomberg Amber */
         }
 
+        /* Protect Material Icons from being overwritten by Consolas */
+        .material-icons, .material-symbols-rounded, .material-symbols-outlined, [class^="stIcon"] {
+            font-family: 'Material Symbols Rounded', 'Material Icons' !important;
+            color: inherit !important;
+        }
+
+        /* Sidebar Font (keep normal so text fits and doesn't cut off) */
+        .stSidebar span, .stSidebar p, .stSidebar div {
+            color: #FF9900 !important;
+        }
+
         /* Metric values - Bloomberg Green */
-        [data-testid="stMetricValue"] div {
+        .main [data-testid="stMetricValue"] div, .main [data-testid="stMetricValue"] {
             color: #00FF00 !important; 
             font-size: 1.4rem !important;
             white-space: normal !important;
@@ -52,7 +63,7 @@ def apply_custom_theme():
         }
         
         /* Metric Delta/Subtext - Bright Cyan */
-        [data-testid="stMetricDelta"] div {
+        .main [data-testid="stMetricDelta"] div, .main [data-testid="stMetricDelta"] {
             color: #00FFFF !important;
             font-size: 1.0rem !important;
         }

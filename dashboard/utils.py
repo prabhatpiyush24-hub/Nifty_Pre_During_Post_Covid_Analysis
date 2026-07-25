@@ -70,7 +70,6 @@ def apply_custom_theme():
 
         /* Adjust padding for denser layout */
         .block-container {
-            padding-top: 1rem !important;
             padding-bottom: 1rem !important;
             max-width: 95% !important;
         }

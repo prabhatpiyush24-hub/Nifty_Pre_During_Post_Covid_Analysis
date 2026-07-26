@@ -48,6 +48,6 @@ else:
 st.subheader("Company-level audit")
 status_filter = st.multiselect("Status", sorted(audit["Status"].unique()), default=sorted(audit["Status"].unique()))
 filtered = audit.loc[audit["Status"].isin(status_filter)]
-st.dataframe(filtered.style.format({"Maximum Return Formula Error": "{:.2e}", "Maximum Log Return Formula Error": "{:.2e}", "Maximum Excess Return Formula Error": "{:.2e}"}), hide_index=True, use_container_width=True)
+st.dataframe(filtered.style.format({"Maximum Return Formula Error": "{:.8f}", "Maximum Log Return Formula Error": "{:.8f}", "Maximum Excess Return Formula Error": "{:.8f}"}), hide_index=True, use_container_width=True)
 with st.expander("Audit metadata"):
     st.json(summary)

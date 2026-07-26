@@ -19,12 +19,19 @@ st.caption("Ask questions about the NIFTY 500 dataset, regimes, and risk/return 
 # ── Sidebar: API Key Configuration ────────────────────────────────
 with st.sidebar:
     st.header("⚙️ Configuration")
-    api_key = st.text_input(
-        "Groq API Key",
-        type="password",
-        help="Enter your Groq API key to enable the AI assistant. It is not saved.",
-    )
-    st.markdown("[Get a free Groq API key](https://console.groq.com/keys)")
+    
+    # Try to get API key from Streamlit secrets first
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+        st.success("API Key successfully loaded from Secure Secrets!")
+    except (FileNotFoundError, KeyError):
+        api_key = st.text_input(
+            "Groq API Key",
+            type="password",
+            help="Enter your Groq API key to enable the AI assistant. It is not saved.",
+        )
+        st.markdown("[Get a free Groq API key](https://console.groq.com/keys)")
+        st.warning("For public access, add `GROQ_API_KEY` to your Streamlit Cloud Secrets.")
     
     st.divider()
     st.markdown("""
@@ -92,7 +99,7 @@ for message in st.session_state.messages:
 # React to user input
 if prompt := st.chat_input("Ask about sector performance, volatility, or the COVID crash..."):
     if not api_key:
-        st.error("⚠️ Please enter your Groq API Key in the sidebar to use the Assistant.")
+        st.error("⚠️ Please enter your Groq API Key in the sidebar (or add to Streamlit Secrets) to use the Assistant.")
         st.stop()
         
     try:
@@ -124,7 +131,7 @@ if prompt := st.chat_input("Ask about sector performance, volatility, or the COV
             
             # Streaming response
             for chunk in client.chat.completions.create(
-                model="llama3-70b-8192",
+                model="llama-3.3-70b-versatile",
                 messages=api_messages,
                 stream=True,
                 temperature=0.2, # Low temp for analytical factualness

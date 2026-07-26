@@ -14,11 +14,11 @@ if str(dashboard_directory) not in sys.path:
 from utils import apply_custom_theme, load_audit
 
 
-st.set_page_config(page_title="NIFTY 500 Quant Research", page_icon="📈", layout="wide")
+st.set_page_config(page_title="QuantNifty", page_icon="📈", layout="wide")
 apply_custom_theme()
 
 summary, _, _ = load_audit()
-st.title("NIFTY 500 Quantitative Research Platform")
+st.title("QuantNifty")
 st.caption("311 continuously eligible companies • NIFTY 50 benchmark • 2015–2025")
 
 if summary["status"] != "PASS":

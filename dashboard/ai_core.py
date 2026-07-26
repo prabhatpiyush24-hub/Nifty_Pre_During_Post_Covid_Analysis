@@ -4,23 +4,31 @@ from utils import load_market_metrics, load_sector_metrics, load_company_metrics
 
 def sidebar_api_key_config():
     """Renders the API key configuration in the sidebar."""
-    if "api_key_rendered" not in st.session_state:
-        st.sidebar.header("🤖 AI Assistant")
-        try:
-            api_key = st.secrets["GROQ_API_KEY"]
-            st.sidebar.success("API Key loaded from Secure Secrets!")
-            st.session_state["groq_api_key"] = api_key
-        except (FileNotFoundError, KeyError):
-            api_key = st.sidebar.text_input(
-                "Groq API Key",
-                type="password",
-                help="Enter your Groq API key to enable the AI assistant.",
-                key="groq_key_input"
-            )
-            st.sidebar.markdown("[Get a free Groq API key](https://console.groq.com/keys)")
-            st.sidebar.warning("For public access, add `GROQ_API_KEY` to your Streamlit Cloud Secrets.")
-            st.session_state["groq_api_key"] = api_key
-        st.session_state["api_key_rendered"] = True
+    st.sidebar.markdown("# QuantNifty")
+    st.sidebar.header("🤖 AI Assistant")
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+        st.sidebar.success("API Key loaded from Secure Secrets!")
+        st.session_state["groq_api_key"] = api_key
+    except (FileNotFoundError, KeyError):
+        # We use a persistent key so the value isn't lost on navigation
+        api_key = st.sidebar.text_input(
+            "Groq API Key",
+            type="password",
+            help="Enter your Groq API key to enable the AI assistant.",
+            key="groq_key_input"
+        )
+        st.sidebar.markdown("[Get a free Groq API key](https://console.groq.com/keys)")
+        st.sidebar.warning("For public access, add `GROQ_API_KEY` to your Streamlit Cloud Secrets.")
+        st.session_state["groq_api_key"] = api_key
+        
+    st.sidebar.markdown("---")
+    st.sidebar.markdown(
+        "<div style='text-align: center; color: #94A3B8; font-size: 0.85em; margin-top: 20px; font-weight: 500; letter-spacing: 0.05em;'>"
+        "MADE BY PIYUSH PRABHAT"
+        "</div>", 
+        unsafe_allow_html=True
+    )
     return st.session_state.get("groq_api_key", "")
 
 @st.cache_data(ttl=3600)

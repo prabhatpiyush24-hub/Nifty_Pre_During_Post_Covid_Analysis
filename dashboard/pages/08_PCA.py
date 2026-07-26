@@ -69,7 +69,7 @@ st.info(
     f"**{explained['Cumulative Variance'].iloc[-1]:.1%}** "
     f"of total return variance."
 )
-)
+
 st.info("""
 **Quant Explainer: Explained Variance**
 In institutional quantitative finance, PCA is used to extract hidden "Risk Factors" from the market. 

@@ -178,6 +178,6 @@ st.dataframe(
 )
 
 render_ai_chat(
-    context_data=f"The user is viewing Clustering Analysis. Currently exploring cluster: {selected_cluster}. Cluster averages: {summary.to_markdown()}",
+    context_data=f"The user is viewing Clustering Analysis. Currently exploring cluster: {selected_cluster}. Cluster averages: {cluster_stats.to_markdown()}",
     unique_key="clustering_bottom"
 )

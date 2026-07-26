@@ -189,6 +189,6 @@ st.plotly_chart(fig_dist, use_container_width=True)
 st.caption("A histogram showing the frequency of different daily returns. A wider bell shape means higher risk, while a narrow peak means consistent, low-volatility returns.")
 
 render_ai_chat(
-    context_data=f"The user is viewing the Stock Explorer for {selected_symbol}. Metrics shown: {metrics_dict}",
+    context_data=f"The user is viewing the Stock Explorer for {selected_symbol}. Metrics shown: {m}",
     unique_key="stock_explorer_bottom"
 )

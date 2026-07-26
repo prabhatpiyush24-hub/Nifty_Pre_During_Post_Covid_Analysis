@@ -13,6 +13,7 @@ if str(dashboard_directory) not in sys.path:
     sys.path.insert(0, str(dashboard_directory))
 
 from utils import apply_custom_theme, cumulative_wealth, load_daily_returns, load_sector_daily, load_sector_metrics
+from ai_core import render_ai_chat
 
 st.title("Industry Analysis")
 st.caption(
@@ -158,3 +159,8 @@ if selected:
         use_container_width=True,
     )
     st.caption("Cumulative growth of a ₹100 investment in an equal-weight portfolio of the selected industries.")
+
+render_ai_chat(
+    context_data=f"The user is viewing Industry Analysis. Selected industries for growth comparison: {selected}. Metrics shown in table: {display.to_markdown(index=False)}",
+    unique_key="industry_bottom"
+)

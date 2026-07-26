@@ -20,6 +20,7 @@ from utils import (
     load_daily_returns, portfolio_summary, portfolio_weights,
     selected_regime_returns, to_number, to_percent, TRADING_DAYS, format_symbol,
 )
+from ai_core import render_ai_chat
 
 st.title("Portfolio Optimization")
 st.caption(
@@ -220,4 +221,9 @@ if comparison_rows:
 st.caption(
     f"Optimization used {len(returns):,} synchronized daily observations. "
     f"The effective maximum weight is at least 1/N to keep the optimization feasible."
+)
+
+render_ai_chat(
+    context_data=f"The user is viewing Portfolio Optimization. Selected companies: {selected}. " + (f"Comparison: {comparison.to_markdown(index=False)}" if comparison_rows else ""),
+    unique_key="portfolio_bottom"
 )

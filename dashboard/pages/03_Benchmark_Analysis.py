@@ -18,6 +18,7 @@ from utils import (
     apply_custom_theme, load_benchmark_prices, load_daily_returns, load_market_metrics,
     to_number, to_percent,
 )
+from ai_core import render_ai_chat
 
 st.title("Benchmark Analysis — NIFTY 50")
 st.caption(
@@ -157,3 +158,8 @@ This table breaks down the index's risk and return profile across different mark
 - **Post-COVID**: The liquidity-driven recovery phase.
 *Compare the Sharpe Ratios across these regimes to understand how the risk-reward tradeoff dramatically shifts during crisis versus recovery.*
 """)
+
+render_ai_chat(
+    context_data=f"The user is viewing the Benchmark Analysis page. The performance by regime is: \n{regime_display.to_markdown(index=False)}",
+    unique_key="benchmark_bottom"
+)

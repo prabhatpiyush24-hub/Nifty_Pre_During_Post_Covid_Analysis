@@ -16,6 +16,7 @@ if str(dashboard_directory) not in sys.path:
     sys.path.insert(0, str(dashboard_directory))
 
 from utils import apply_custom_theme, load_company_metrics
+from ai_core import render_ai_chat
 
 st.title("Clustering Analysis")
 st.caption(
@@ -174,4 +175,9 @@ st.dataframe(
         "Beta to NIFTY 50": "{:.2f}",
     }),
     hide_index=True, use_container_width=True,
+)
+
+render_ai_chat(
+    context_data=f"The user is viewing Clustering Analysis. Currently exploring cluster: {selected_cluster}. Cluster averages: {summary.to_markdown()}",
+    unique_key="clustering_bottom"
 )

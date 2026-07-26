@@ -17,6 +17,7 @@ from utils import (
     apply_custom_theme, load_company_metrics, load_correlation, load_correlation_pairs,
     load_correlation_summary, load_daily_returns, load_sector_daily, format_symbol,
 )
+from ai_core import render_ai_chat
 
 st.title("Correlation Analysis")
 st.caption(
@@ -171,3 +172,8 @@ if sym_a != sym_b:
     st.caption("A scatter plot comparing the daily returns of two specific companies to visually assess their correlation.")
 else:
     st.info("Select two different companies to compare.")
+
+render_ai_chat(
+    context_data=f"The user is viewing Correlation Analysis. Currently comparing {sym_a} and {sym_b}.",
+    unique_key="correlation_bottom"
+)

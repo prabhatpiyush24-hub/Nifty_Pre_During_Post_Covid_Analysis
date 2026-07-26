@@ -17,6 +17,7 @@ from utils import (
     apply_custom_theme, cumulative_wealth, load_company_metrics, load_daily_returns,
     to_number, to_percent, TRADING_DAYS, format_symbol,
 )
+from ai_core import render_ai_chat
 
 st.title("Risk & Return Analysis")
 st.caption(
@@ -181,3 +182,9 @@ row1[2].metric("Beta", to_number(company["Beta to NIFTY 50"]), help="Sensitivity
 row2 = st.columns(3)
 row2[0].metric("Alpha", to_percent(company["Annualized Alpha (Rf=6.5%)"]), help="Annualized excess return relative to the benchmark.")
 row2[1].metric("Max Drawdown", to_percent(company["Maximum Drawdown"]), help="Largest peak-to-trough drop.")
+row2[2].metric("Sharpe Ratio", to_number(company["Sharpe Ratio (Rf=6.5%)"]), help="Risk-adjusted return.")
+
+render_ai_chat(
+    context_data=f"The user is viewing Risk & Return analysis. They have selected the specific company: {symbol}. Company metrics: {company.to_dict()}",
+    unique_key="risk_return_bottom"
+)

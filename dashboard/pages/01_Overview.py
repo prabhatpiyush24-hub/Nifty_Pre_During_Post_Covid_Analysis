@@ -17,6 +17,7 @@ from utils import (
     apply_custom_theme, cumulative_wealth, load_audit, load_company_metrics, load_daily_returns,
     load_market_metrics, to_number, to_percent,
 )
+from ai_core import render_ai_chat
 
 st.title("Overview")
 st.caption("High-level summary of the NIFTY 500 quantitative research dataset")
@@ -207,3 +208,8 @@ This table isolates the absolute best-performing assets in the NIFTY 500 univers
 - **Sharpe/Alpha**: Risk-adjusted returns (how much excess return was generated per unit of volatility). 
 *Use this to identify outlier stocks that consistently beat the market on a risk-adjusted basis.*
 """)
+
+render_ai_chat(
+    context_data=f"The user is viewing the Overview page. The current top companies by {rank_by} are: \n{leaders.to_markdown(index=False)}",
+    unique_key="overview_bottom"
+)

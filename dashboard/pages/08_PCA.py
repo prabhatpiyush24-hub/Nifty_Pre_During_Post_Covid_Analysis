@@ -14,6 +14,7 @@ if str(dashboard_directory) not in sys.path:
     sys.path.insert(0, str(dashboard_directory))
 
 from utils import apply_custom_theme, load_company_metrics, load_daily_returns, run_pca
+from ai_core import render_ai_chat
 
 st.title("Principal Component Analysis")
 st.caption(
@@ -156,3 +157,8 @@ if n_components >= 3:
     """)
 else:
     st.info("Select at least 3 components to view the 3D visualization.")
+
+render_ai_chat(
+    context_data=f"The user is viewing PCA Analysis. Explained Variance Ratios for the selected components: {var.to_dict()}.",
+    unique_key="pca_bottom"
+)

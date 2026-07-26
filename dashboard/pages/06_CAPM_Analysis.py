@@ -18,6 +18,7 @@ from utils import (
     apply_custom_theme, capm_regression, load_company_metrics, load_daily_returns,
     load_market_metrics, to_number, to_percent, TRADING_DAYS, format_symbol,
 )
+from ai_core import render_ai_chat
 
 st.title("CAPM Analysis")
 st.caption(
@@ -178,3 +179,8 @@ st.plotly_chart(
     use_container_width=True,
 )
 st.caption("Cumulative wealth growth of the selected stock compared to the NIFTY 50 benchmark.")
+
+render_ai_chat(
+    context_data=f"The user is viewing CAPM Analysis for {symbol}. Regression metrics: Beta={reg['Beta']:.2f}, Alpha (Ann)={reg['Alpha (Annualized)']:.4%}, R-squared={reg['R²']:.2f}.",
+    unique_key="capm_bottom"
+)

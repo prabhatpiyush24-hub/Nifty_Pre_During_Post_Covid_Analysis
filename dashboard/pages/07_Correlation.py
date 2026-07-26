@@ -15,7 +15,7 @@ if str(dashboard_directory) not in sys.path:
 
 from utils import (
     apply_custom_theme, load_company_metrics, load_correlation, load_correlation_pairs,
-    load_correlation_summary, load_daily_returns, load_sector_daily,
+    load_correlation_summary, load_daily_returns, load_sector_daily, format_symbol,
 )
 
 st.title("Correlation Analysis")
@@ -53,7 +53,7 @@ defaults = (
     ["Symbol"].head(20).tolist()
 )
 selected_symbols = st.multiselect(
-    "Companies in the heatmap (maximum 40)", available_symbols, default=defaults
+    "Companies in the heatmap (maximum 40)", available_symbols, default=defaults, format_func=format_symbol
 )[:40]
 
 if len(selected_symbols) >= 2:
@@ -146,10 +146,10 @@ st.subheader("Company Pairwise Comparison")
 comp_symbols = sorted(full["Symbol"])
 col1, col2 = st.columns(2)
 with col1:
-    sym_a = st.selectbox("Company A", comp_symbols, index=0)
+    sym_a = st.selectbox("Company A", comp_symbols, index=0, format_func=format_symbol)
 with col2:
     sym_b = st.selectbox("Company B", comp_symbols,
-                         index=min(1, len(comp_symbols) - 1))
+                         index=1 if len(comp_symbols) > 1 else 0, format_func=format_symbol)
 
 if sym_a != sym_b:
     ret_a = daily.loc[daily["Symbol"] == sym_a, ["Date", "Return"]].rename(

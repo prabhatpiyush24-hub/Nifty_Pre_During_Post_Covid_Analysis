@@ -15,7 +15,7 @@ if str(dashboard_directory) not in sys.path:
 
 from utils import (
     apply_custom_theme, cumulative_wealth, load_company_metrics, load_daily_returns,
-    to_number, to_percent, TRADING_DAYS,
+    to_number, to_percent, TRADING_DAYS, format_symbol,
 )
 
 st.title("Risk & Return Analysis")
@@ -129,7 +129,7 @@ st.subheader("Rolling Risk Analysis")
 symbols = sorted(display["Symbol"].unique())
 selected_symbols = st.multiselect(
     "Select companies for rolling volatility",
-    symbols, default=symbols[:3], max_selections=8,
+    symbols, default=symbols[:3], max_selections=8, format_func=format_symbol,
 )
 if selected_symbols:
     rolling_data = daily[daily["Symbol"].isin(selected_symbols)].copy()
@@ -148,9 +148,10 @@ if selected_symbols:
 
 # ── Company versus benchmark ────────────────────────────────────
 st.markdown("---")
-st.subheader("Company versus Benchmark")
-symbol = st.selectbox("Company", sorted(display["Symbol"]), index=0)
-company = display.loc[display["Symbol"] == symbol].iloc[0]
+st.subheader("Deep Dive: Single Company")
+symbol = st.selectbox("Company", sorted(display["Symbol"]), index=0, format_func=format_symbol)
+
+company = display[display["Symbol"] == symbol].iloc[0]
 company_path = daily.loc[daily["Symbol"] == symbol]
 if regime != "Full Sample":
     company_path = company_path.loc[company_path["Regime"] == regime]

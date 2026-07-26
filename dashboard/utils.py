@@ -189,6 +189,18 @@ def load_audit() -> tuple[dict, pd.DataFrame, pd.DataFrame]:
 
 # ── Formatters ────────────────────────────────────────────────────
 
+@st.cache_data(show_spinner=False)
+def get_symbol_name_mapping() -> dict[str, str]:
+    master = load_company_master()
+    return dict(zip(master["Symbol"], master["Company Name"]))
+
+
+def format_symbol(symbol: str) -> str:
+    mapping = get_symbol_name_mapping()
+    name = mapping.get(symbol, "")
+    return f"{symbol} - {name}" if name else symbol
+
+
 def to_percent(value: float, digits: int = 1) -> str:
     return "—" if pd.isna(value) else f"{value:.{digits}%}"
 

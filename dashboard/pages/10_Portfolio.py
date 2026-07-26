@@ -18,7 +18,7 @@ if str(dashboard_directory) not in sys.path:
 from utils import (
     apply_custom_theme, cumulative_wealth, efficient_frontier_points, load_company_metrics,
     load_daily_returns, portfolio_summary, portfolio_weights,
-    selected_regime_returns, to_number, to_percent, TRADING_DAYS,
+    selected_regime_returns, to_number, to_percent, TRADING_DAYS, format_symbol,
 )
 
 st.title("Portfolio Optimization")
@@ -55,7 +55,7 @@ with third:
     )
 
 selected = st.multiselect(
-    "Companies (2–30)", symbols, default=default_symbols, max_selections=30
+    "Companies (2–30)", symbols, default=default_symbols, max_selections=30, format_func=format_symbol
 )
 max_weight = st.slider(
     "Maximum individual weight",

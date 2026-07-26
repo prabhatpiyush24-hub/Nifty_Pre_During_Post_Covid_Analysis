@@ -16,7 +16,7 @@ if str(dashboard_directory) not in sys.path:
 
 from utils import (
     apply_custom_theme, capm_regression, load_company_metrics, load_daily_returns,
-    load_market_metrics, to_number, to_percent, TRADING_DAYS,
+    load_market_metrics, to_number, to_percent, TRADING_DAYS, format_symbol,
 )
 
 st.title("CAPM Analysis")
@@ -111,7 +111,7 @@ with right:
 # ── Single-stock regression ──────────────────────────────────────
 st.markdown("---")
 st.subheader("Single-Stock CAPM Regression")
-symbol = st.selectbox("Select company", sorted(display["Symbol"]))
+symbol = st.selectbox("Select company", sorted(display["Symbol"]), format_func=format_symbol)
 
 stock_daily = daily[daily["Symbol"] == symbol].copy()
 if regime != "Full Sample":

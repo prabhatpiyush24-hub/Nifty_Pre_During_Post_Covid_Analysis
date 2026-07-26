@@ -36,12 +36,22 @@ st.info(
 )
 
 st.markdown("""
-This dashboard provides a comprehensive quantitative analysis of the **NIFTY 500 universe**—representing the top 500 companies listed on the National Stock Exchange of India. 
+### Executive Summary
+This dashboard is a comprehensive, institutional-grade quantitative research platform built to analyze the **NIFTY 500 universe** (the top equities on the National Stock Exchange of India) across a full 10-year market cycle. 
 
-**Core Concepts:**
-- **Performance Evaluation:** We compare each stock's performance against the **NIFTY 50** index (the top 50 blue-chip companies, used as our baseline benchmark).
-- **Risk & Return:** We analyze how much return a stock generates relative to the risk (price volatility) it takes.
-- **Advanced Analytics:** We use statistical techniques (PCA, Clustering) to uncover hidden patterns and relationships among these stocks.
+It specifically focuses on modeling stock and sector performance through the **COVID-19 macroeconomic shock** (Pre-COVID, the March 2020 Crash, and Post-COVID Recovery) to identify structural regime shifts, changing risk profiles, and alpha-generating opportunities.
+
+### Value Proposition
+- **Risk-Adjusted Benchmarking**: Instantly compare absolute returns (CAGR) against volatility and downside risk (Max Drawdown, CVaR).
+- **Regime Shift Detection**: Uncover how correlations and market betas fundamentally broke or strengthened during the COVID-19 crisis.
+- **Advanced Quantitative Modeling**: Leverage statistical learning (PCA for factor extraction, K-Means Clustering for risk grouping, CAPM for alpha generation) to analyze the market.
+- **Portfolio Optimization**: Construct mathematically optimal portfolios (Minimum Variance, Maximum Sharpe) on the Efficient Frontier.
+
+### Data Dictionary
+- **Universe**: Over 300 highly liquid NIFTY 500 equities that passed stringent data-quality audits (no missing sessions over 10 years).
+- **Observations**: 10 years of daily adjusted-close returns (dividends and splits adjusted) spanning thousands of trading sessions.
+- **Categorization**: Full macro-sector and industry mappings for aggregate analysis.
+- **Benchmark**: NIFTY 50 Index, used as the proxy for the broader Indian market and systematic risk.
 """)
 
 row1 = st.columns(3)

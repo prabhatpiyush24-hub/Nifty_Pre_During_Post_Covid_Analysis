@@ -4,8 +4,7 @@ from utils import load_market_metrics, load_sector_metrics, load_company_metrics
 
 def sidebar_api_key_config():
     """Renders the API key configuration in the sidebar."""
-    st.sidebar.markdown("# QuantNifty")
-    st.sidebar.header("🤖 AI Assistant")
+    st.sidebar.header("🤖 QuantNifty AI")
     try:
         api_key = st.secrets["GROQ_API_KEY"]
         st.sidebar.success("API Key loaded from Secure Secrets!")
@@ -22,13 +21,6 @@ def sidebar_api_key_config():
         st.sidebar.warning("For public access, add `GROQ_API_KEY` to your Streamlit Cloud Secrets.")
         st.session_state["groq_api_key"] = api_key
         
-    st.sidebar.markdown("---")
-    st.sidebar.markdown(
-        "<div style='text-align: center; color: #94A3B8; font-size: 0.85em; margin-top: 20px; font-weight: 500; letter-spacing: 0.05em;'>"
-        "MADE BY PIYUSH PRABHAT"
-        "</div>", 
-        unsafe_allow_html=True
-    )
     return st.session_state.get("groq_api_key", "")
 
 @st.cache_data(ttl=3600)

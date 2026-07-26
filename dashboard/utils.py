@@ -80,7 +80,14 @@ def apply_custom_theme():
         """,
         unsafe_allow_html=True,
     )
-
+    
+    st.sidebar.markdown("# QuantNifty")
+    st.sidebar.markdown(
+        "<div style='position: fixed; bottom: 20px; left: 0; width: 100%; text-align: center; color: #94A3B8; font-size: 0.85em; font-weight: 500; letter-spacing: 0.05em;'>"
+        "MADE BY PIYUSH PRABHAT"
+        "</div>", 
+        unsafe_allow_html=True
+    )
 
 # ── Data loaders ──────────────────────────────────────────────────
 

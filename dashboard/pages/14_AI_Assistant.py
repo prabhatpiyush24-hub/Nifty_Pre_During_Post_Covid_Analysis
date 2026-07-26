@@ -9,10 +9,10 @@ if str(dashboard_directory) not in sys.path:
 from utils import apply_custom_theme
 from ai_core import build_base_system_prompt
 
-st.set_page_config(page_title="Global AI Assistant", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="QuantNifty Assistant", page_icon="🤖", layout="wide")
 apply_custom_theme()
 
-st.title("🤖 Global AI Assistant")
+st.title("🤖 QuantNifty Assistant")
 st.caption("Ask questions about the NIFTY 500 dataset, regimes, and risk/return metrics across the entire dashboard.")
 
 # Get API key from session state or secrets

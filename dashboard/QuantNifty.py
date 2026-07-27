@@ -22,13 +22,14 @@ st.title("QuantNifty")
 st.caption("311 continuously eligible companies • NIFTY 50 benchmark • 2015–2025")
 
 # Animated Quant Cover Image (CSS/SVG)
-st.markdown("""
+import streamlit.components.v1 as components
+components.html("""
 <div style="width: 100%; height: 220px; border-radius: 12px; overflow: hidden; position: relative; background: linear-gradient(135deg, #0B1120 0%, #0F172A 100%); border: 1px solid #1E293B; margin-bottom: 2rem; margin-top: 1rem; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);">
     <!-- Animated Grid -->
     <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 30px 30px; animation: panGrid 30s linear infinite;"></div>
     
     <!-- SVG Chart -->
-    <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
+    <svg width="100%" height="100%" viewBox="0 0 1000 200" preserveAspectRatio="none" style="position: absolute; bottom: 0; display: block;">
         <defs>
             <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="0%" stop-color="#10B981" stop-opacity="0.3" />
@@ -62,6 +63,7 @@ st.markdown("""
     </div>
 
     <style>
+        body { margin: 0; padding: 0; background: transparent; }
         @keyframes panGrid {
             0% { background-position: 0 0; }
             100% { background-position: -60px 60px; }
@@ -87,7 +89,7 @@ st.markdown("""
         }
     </style>
 </div>
-""", unsafe_allow_html=True)
+""", height=250)
 if summary["status"] != "PASS":
     st.error("The data-quality gate is not passing. Do not use dashboard results until the audit is resolved.")
 else:
